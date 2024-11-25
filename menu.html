@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio de Açaí</title>
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <header>
+        <h1>Cardápio de Açaí</h1>
+    </header>
+    <main>
+        <section class="menu-item">
+            <h2>Açaí do Rei</h2>
+            <p>Banana, morango, granola e mel</p>
+            <span class="price">R$ 15,00</span>
+            <button onclick="addToCart('Açaí do Rei', 15)">Adicionar ao Carrinho</button>
+        </section>
+        <section class="menu-item">
+            <h2>Açaí Ninho</h2>
+            <p>Banana, morango, granola e leite em pó</p>
+            <span class="price">R$ 17,00</span>
+            <button onclick="addToCart('Açaí Ninho', 17)">Adicionar ao Carrinho</button>
+        </section>
+        <section class="menu-item">
+            <h2>Açaí Frutas</h2>
+            <p>3 Frutas, granola e leite condensado</p>
+            <span class="price">R$ 18,00</span>
+            <button onclick="addToCart('Açaí Frutas', 18)">Adicionar ao Carrinho</button>
+        </section>
+        <section class="menu-item">
+            <h2>Açaí Condensado</h2>
+            <p>Banana, morango, granola e leite condensado</p>
+            <span class="price">R$ 16,00</span>
+            <button onclick="addToCart('Açaí Condensado', 16)">Adicionar ao Carrinho</button>
+        </section>
+        <section class="menu-item">
+            <h2>Açaí Tropical</h2>
+            <p>Banana, morango, kiwi, manga e abacaxi</p>
+            <span class="price">R$ 20,00</span>
+            <button onclick="addToCart('Açaí Tropical', 20)">Adicionar ao Carrinho</button>
+        </section>
+        <section class="menu-item">
+            <h2>Açaí Nutella</h2>
+            <p>3 frutas e Nutella</p>
+            <span class="price">R$ 22,00</span>
+            <button onclick="addToCart('Açaí Nutella', 22)">Adicionar ao Carrinho</button>
+        </section>
+        <section class="menu-item">
+            <h2>Açaí Ovomaltine</h2>
+            <p>Leite em pó, ovomaltine e morango</p>
+            <span class="price">R$ 22,00</span>
+            <button onclick="addToCart('Açaí Ovomaltine', 22)">Adicionar ao Carrinho</button>
+        </section>
+        <section class="menu-item">
+            <h2>Açaí Nucita</h2>
+            <p>Mousse de morango, Nutella e raspas de chocolate</p>
+            <span class="price">R$ 25,00</span>
+            <button onclick="addToCart('Açaí Nucita', 25)">Adicionar ao Carrinho</button>
+        </section>
+        <section class="menu-item">
+            <h2>Açaí Fitness</h2>
+            <p>Banana, morango, kiwi e granola</p>
+            <span class="price">R$ 25,00</span>
+            <button onclick="addToCart('Açaí Fitness', 25)">Adicionar ao Carrinho</button>
+        </section>
+        <section class="menu-item">
+            <h2>Açaí Mousse</h2>
+            <p>Leite em pó, mousse de morango, morango e banana</p>
+            <span class="price">R$ 22,00</span>
+            <button onclick="addToCart('Açaí Mousse', 22)">Adicionar ao Carrinho</button>
+        </section>
+
+        <!-- Carrinho -->
+        <div class="cart">
+            <h2>Seu Carrinho</h2>
+            <ul id="cart-list"></ul>
+            <p><strong>Total:</strong> R$ <span id="cart-total">0.00</span></p>
+            <button class="checkout-button" id="checkout-button" onclick="goToPayment()" style="display: none;">
+                Ir para Pagamento
+            </button>
+        </div>
+    </main>
+    <script>
+        const cart = [];
+        let total = 0;
+    
+        function addToCart(item, price) {
+            const itemId = cart.length; // ID único para o item
+            cart.push({ id: itemId, item, price });
+            total += price;
+            renderCart();
+        }
+    
+        function removeFromCart(id) {
+            const itemIndex = cart.findIndex(cartItem => cartItem.id === id);
+            if (itemIndex !== -1) {
+                total -= cart[itemIndex].price; // Subtrai o preço do total
+                cart.splice(itemIndex, 1); // Remove o item do array
+                renderCart();
+            }
+        }
+    
+        function renderCart() {
+            const cartList = document.getElementById('cart-list');
+            const cartTotal = document.getElementById('cart-total');
+            const checkoutButton = document.getElementById('checkout-button');
+    
+            // Limpa a lista antes de renderizar novamente
+            cartList.innerHTML = '';
+    
+            // Renderiza cada item do carrinho
+            cart.forEach(cartItem => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${cartItem.item} - R$ ${cartItem.price.toFixed(2)}`;
+    
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Remover';
+                removeButton.onclick = () => removeFromCart(cartItem.id);
+    
+                listItem.appendChild(removeButton);
+                cartList.appendChild(listItem);
+            });
+    
+            // Atualiza o total
+            cartTotal.textContent = total.toFixed(2);
+    
+            // Exibe o botão de pagamento apenas se o carrinho tiver itens
+            checkoutButton.style.display = cart.length > 0 ? 'inline-block' : 'none';
+        }
+    
+        function goToPayment() {
+            // Armazenando o valor total no localStorage
+            localStorage.setItem('cartTotal', total.toFixed(2));
+            window.location.href = "pagamento.html"; // Altere para o nome do HTML de pagamento
+        }
+    </script>
+    
+</body>
+</html>

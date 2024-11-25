@@ -1,0 +1,94 @@
+@import url('https://fonts.cdnfonts.com/css/adigiana-ultra');
+
+
+body {
+    font-family: 'Adigiana Ultra', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+header {
+    background-color: #8e44ad;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.payment-methods label {
+    font-size: 1.1rem;
+    margin-bottom: 1.7rem;
+    cursor: pointer;
+    display: block;
+}
+
+.payment-form {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 2rem;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 1.5rem;
+}
+
+input, button {
+    width: 100%;
+    padding: 0.75em;
+    margin-bottom: 1rem;
+    border: 1px solid #D29AF0;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #D29AF0;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #b57dde;
+}
+
+section .background-section {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+section .background-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
